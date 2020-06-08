@@ -41,4 +41,11 @@ server.put(`${path}/:id`, (req, res) => {
     })
 })//working
 
+server.delete(`${path}/:id`, (req, res) => {
+    knex('accounts').del().where({id: req.params.id})
+    .then(deletedAccount => {
+        res.status(200).json(deletedAccount);
+    })
+})
+
 module.exports = server;
