@@ -21,13 +21,24 @@ server.get(`${path}/:id`, (req, res) => {
     .then(account => {
         res.status(200).json(account)
     })
-})
+})//working
 
 server.post(`${path}`, (req, res) => {
     knex('accounts').insert({name: req.body.name, budget: req.body.budget})
     .then(newAccount => {
         res.status(200).json(newAccount);
     })
-})
+})//working
+
+server.put(`${path}/:id`, (req, res) => {
+    knex('accounts').update({name: req.body.name, budget: req.body.name})
+    .where({id: req.params.id})
+    .then(updatedAccount => {
+        res.status(200).json(updatedAccount);
+    })
+    .catch(error => {
+        res.status(500).json({error: error.message})
+    })
+})//working
 
 module.exports = server;
