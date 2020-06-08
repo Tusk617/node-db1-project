@@ -23,4 +23,11 @@ server.get(`${path}/:id`, (req, res) => {
     })
 })
 
+server.post(`${path}`, (req, res) => {
+    knex('accounts').insert({name: req.body.name, budget: req.body.budget})
+    .then(newAccount => {
+        res.status(200).json(newAccount);
+    })
+})
+
 module.exports = server;
